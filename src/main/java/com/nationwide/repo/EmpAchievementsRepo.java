@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.nationwide.data.EmpAchievements;
 
-public interface EmpAchievementsRepo extends JpaRepository<EmpAchievements, Integer> {
+public interface EmpAchievementsRepo extends JpaRepository<EmpAchievements, String> {
 	
 	public ArrayList<EmpAchievements> findAll();
 }
