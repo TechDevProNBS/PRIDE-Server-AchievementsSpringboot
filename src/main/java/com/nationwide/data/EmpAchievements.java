@@ -3,6 +3,8 @@ package com.nationwide.data;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,7 +13,9 @@ import javax.persistence.Table;
 public class EmpAchievements {
 	
 	@Id
-	private String rempno;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int emp_achieve_id;
+	private String empno;
 	private int achievement_id;
 	private Date date_achieved;
 	
@@ -19,17 +23,25 @@ public class EmpAchievements {
 	}
 
 	public EmpAchievements(String rempno, int achievement_id, Date date_achieved) {
-		this.rempno = rempno;
+		this.empno = rempno;
 		this.achievement_id = achievement_id;
 		this.date_achieved = date_achieved;
 	}
 
+	public int getEmp_achieve_id() {
+		return emp_achieve_id;
+	}
+
+	public void setEmp_achieve_id(int emp_achieve_id) {
+		this.emp_achieve_id = emp_achieve_id;
+	}
+
 	public String getRempno() {
-		return rempno;
+		return empno;
 	}
 
 	public void setRempno(String rempno) {
-		this.rempno = rempno;
+		this.empno = rempno;
 	}
 
 	public int getAchievement_id() {
