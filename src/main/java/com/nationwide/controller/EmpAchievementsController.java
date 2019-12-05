@@ -25,7 +25,7 @@ public class EmpAchievementsController {
 		return service.findAll();
 	}
 	
-	@GetMapping("/emp_achivements/{empno}/{p}/{r}/{i}/{d}/{e}")
+	@GetMapping("/emp_achievements/{empno}/{p}/{r}/{i}/{d}/{e}")
 	public ArrayList<Progress> checkEmpAchievements(
 			@PathVariable String empno,
 			@PathVariable String p,
@@ -34,6 +34,17 @@ public class EmpAchievementsController {
 			@PathVariable String d,
 			@PathVariable String e) {
 		return service.checkEmpAchievement(empno,p,r,i,d,e);		
+	}
+	
+	@PostMapping("/emp_achievements/{empno}/{p}/{r}/{i}/{d}/{e}")
+	public void saveEmpAchievements(
+			@PathVariable String empno,
+			@PathVariable String p,
+			@PathVariable String r,
+			@PathVariable String i,
+			@PathVariable String d,
+			@PathVariable String e) {
+		service.saveEmpAchievement(empno,p,r,i,d,e);		
 	}
 
 }
