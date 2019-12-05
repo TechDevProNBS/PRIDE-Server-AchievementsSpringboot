@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nationwide.data.EmpAchievements;
+import com.nationwide.data.Progress;
 import com.nationwide.service.EmpAchievementsService;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -25,7 +26,7 @@ public class EmpAchievementsController {
 	}
 	
 	@GetMapping("/emp_achivements/{empno}/{p}/{r}/{i}/{d}/{e}")
-	public ArrayList checkEmpAchievements(
+	public ArrayList<Progress> checkEmpAchievements(
 			@PathVariable String empno,
 			@PathVariable String p,
 			@PathVariable String r,
