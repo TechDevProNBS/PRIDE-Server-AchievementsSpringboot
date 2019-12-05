@@ -2,7 +2,8 @@ package com.nationwide.data;
 
 public class Progress {
 	
-	private String progressbar;
+	private int progressbar;
+	private int progressachieved;
 	private int achievementno;
 	private String achievementdesc;
 	private int points;
@@ -11,20 +12,30 @@ public class Progress {
 	public Progress() {
 	}
 
-	public Progress(String progressbar, int achievementno, String achievementdesc, int points, int pointsachieved) {
+	public Progress(int progressbar, int progressachieved, int achievementno, String achievementdesc, int points,
+			int pointsachieved) {
 		this.progressbar = progressbar;
+		this.progressachieved = progressachieved;
 		this.achievementno = achievementno;
 		this.achievementdesc = achievementdesc;
 		this.points = points;
 		this.pointsachieved = pointsachieved;
 	}
 
-	public String getProgressbar() {
+	public int getProgressbar() {
 		return progressbar;
 	}
 
-	public void setProgressbar(String progressbar) {
+	public void setProgressbar(int progressbar) {
 		this.progressbar = progressbar;
+	}
+
+	public int getProgressachieved() {
+		return progressachieved;
+	}
+
+	public void setProgressachieved(int progressachieved) {
+		this.progressachieved = progressachieved;
 	}
 
 	public int getAchievementno() {
