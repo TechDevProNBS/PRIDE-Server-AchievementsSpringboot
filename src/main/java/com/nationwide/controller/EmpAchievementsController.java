@@ -28,11 +28,11 @@ public class EmpAchievementsController {
 	@GetMapping("/emp_achievements/{empno}/{p}/{r}/{i}/{d}/{e}")
 	public ArrayList<Progress> checkEmpAchievements(
 			@PathVariable String empno,
-			@PathVariable String p,
-			@PathVariable String r,
-			@PathVariable String i,
-			@PathVariable String d,
-			@PathVariable String e) {
+			@PathVariable int p,
+			@PathVariable int r,
+			@PathVariable int i,
+			@PathVariable int d,
+			@PathVariable int e) {
 		return service.checkEmpAchievement(empno,p,r,i,d,e);		
 	}
 	

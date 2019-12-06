@@ -9,4 +9,5 @@ import com.nationwide.data.Achievements;
 public interface AchievementsRepo extends JpaRepository<Achievements, Integer> {
 	
 	public ArrayList<Achievements> findAll();
+	public int findMaxAchievement_id();
 }
