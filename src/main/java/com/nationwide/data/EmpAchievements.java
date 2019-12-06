@@ -6,10 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "emp_achievements")
+@NamedQuery(name = "EmpAchievements.latestEmpAchievements",
+			query = "select e from EmpAchievements e ORDER BY e.date_achieved DESC")
 public class EmpAchievements {
 	
 	@Id

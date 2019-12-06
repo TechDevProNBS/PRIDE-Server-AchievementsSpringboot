@@ -25,6 +25,11 @@ public class EmpAchievementsController {
 		return service.findAll();
 	}
 	
+	@GetMapping("/emp_achievements/carousel")
+	public ArrayList<EmpAchievements> latestEmpAchievements(){
+		return service.latestEmpAchievements();
+	}
+	
 	@GetMapping("/emp_achievements/{empno}/{p}/{r}/{i}/{d}/{e}")
 	public ArrayList<Progress> saveAchievementsGetProgress(
 			@PathVariable String empno,

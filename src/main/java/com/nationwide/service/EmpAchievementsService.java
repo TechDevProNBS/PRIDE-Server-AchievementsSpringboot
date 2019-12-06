@@ -31,6 +31,20 @@ public class EmpAchievementsService {
 		return erepo.findAll();
 	}
 	
+	public ArrayList<EmpAchievements> latestEmpAchievements(){
+		ArrayList<EmpAchievements> all= erepo.findAll();
+		ArrayList<EmpAchievements> topfive = new ArrayList<EmpAchievements>();
+		if(all.size()<5) {
+			return all;
+		}
+		else{
+			for(int i=0;i<=4;i++) {
+				topfive.add(all.get(i));
+			}
+			return topfive;
+		}
+	}
+	
 	public ArrayList<Progress> saveAchievementsGetProgress(String empno,int p,int r,int i,int d,int e) {
 		int pno = p;
 		int rno = r;
