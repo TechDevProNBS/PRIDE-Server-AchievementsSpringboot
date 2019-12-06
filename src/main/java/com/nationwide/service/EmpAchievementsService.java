@@ -31,7 +31,7 @@ public class EmpAchievementsService {
 		return erepo.findAll();
 	}
 	
-	public ArrayList<Progress> checkEmpAchievement(String empno,int p,int r,int i,int d,int e) {
+	public ArrayList<Progress> saveAchievementsGetProgress(String empno,int p,int r,int i,int d,int e) {
 		int pno = p;
 		int rno = r;
 		int ino = i;
@@ -47,7 +47,6 @@ public class EmpAchievementsService {
 			checkachievement.add("start");
 			for(int y=0;y<allsavedachievements.size();y++) {
 				if(allsavedachievements.get(y).getRempno().contentEquals(empno) && allsavedachievements.get(y).getAchievement_id()==allachievements.get(x).getAchievement_id()){
-					checkachievement.set(x, "complete");
 					int progressachieved = 1;
 					int progressbar = 1;
 					int achievementno = allachievements.get(x).getAchievement_id();
@@ -71,7 +70,6 @@ public class EmpAchievementsService {
 							int pointsachieved = allachievements.get(x).getPoints();
 							Progress thisprogress = new Progress(progressbar, progressachieved,achievementno,achievementdesc,points,pointsachieved);
 							allprogress.add(thisprogress);
-							checkachievement.set(x,"complete");
 						}
 						else {
 							int progressachieved= ano;
@@ -153,7 +151,7 @@ public class EmpAchievementsService {
 		return allprogress;
 	}
 	
-	public void saveEmpAchievement(String empno,String p,String r,String i,String d,String e) {
+	public ArrayList<String> checkandsaveEmpAchievement(String empno,String p,String r,String i,String d,String e) {
 		int pno = Integer.parseInt(p);
 		int rno = Integer.parseInt(r);
 		int ino = Integer.parseInt(i);
@@ -168,7 +166,7 @@ public class EmpAchievementsService {
 			checkachievement.add("start");
 			for(int y=0;y<allsavedachievements.size();y++) {
 				if(allsavedachievements.get(y).getRempno().contentEquals(empno) && allsavedachievements.get(y).getAchievement_id()==allachievements.get(x).getAchievement_id()){
-					checkachievement.set(x, "complete");
+					checkachievement.set(x, "already saved");
 				}
 			}
 			for(int z=0;z<allcriteria.size();z++) {
@@ -176,12 +174,13 @@ public class EmpAchievementsService {
 					if(pno>=allcriteria.get(z).getP() && rno>=allcriteria.get(z).getR() && ino>=allcriteria.get(z).getI() && dno>=allcriteria.get(z).getD() && eno>=allcriteria.get(z).getE()) {
 						if(ano>=(allcriteria.get(z).getA())){
 							saveEmpAchievement(empno,allachievements.get(x).getAchievement_id());
-							checkachievement.set(x,"complete");
+							checkachievement.set(x,"now saved");
 						}
 					}
 				}
 			}
 		}
+		return checkachievement;
 	}
 	
 	public void saveEmpAchievement(String empno, int achievementId) {
