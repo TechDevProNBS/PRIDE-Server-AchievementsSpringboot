@@ -1,6 +1,8 @@
 package com.nationwide.data;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -9,6 +11,8 @@ import javax.persistence.Table;
 public class Criteria {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int criteria_id;
 	private int achievement_id;
 	private int p;
 	private int r;
@@ -28,6 +32,26 @@ public class Criteria {
 		this.d = d;
 		this.e = e;
 		this.a = a;
+	}
+
+	public Criteria(int criteria_id, int achievement_id, int p, int r, int i, int d, int e, int a) {
+		super();
+		this.criteria_id = criteria_id;
+		this.achievement_id = achievement_id;
+		this.p = p;
+		this.r = r;
+		this.i = i;
+		this.d = d;
+		this.e = e;
+		this.a = a;
+	}
+
+	public int getCriteria_id() {
+		return criteria_id;
+	}
+
+	public void setCriteria_id(int criteria_id) {
+		this.criteria_id = criteria_id;
 	}
 
 	public int getAchievement_id() {

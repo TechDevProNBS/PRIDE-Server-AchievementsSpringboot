@@ -4,10 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "achievements")
+@NamedQuery(name = "Achievements.findMaxAchievement_id",
+			query = "select max(a.achievement_id) from Achievements a")
 public class Achievements {
 	
 	@Id
@@ -17,6 +20,11 @@ public class Achievements {
 	private int points;
 	
 	public Achievements() {
+	}	
+
+	public Achievements(String description, int points) {
+		this.description = description;
+		this.points = points;
 	}
 
 	public Achievements(int achievement_id, String description, int points) {

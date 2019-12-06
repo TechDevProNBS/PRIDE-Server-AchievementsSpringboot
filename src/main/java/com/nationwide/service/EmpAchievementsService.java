@@ -31,12 +31,12 @@ public class EmpAchievementsService {
 		return erepo.findAll();
 	}
 	
-	public ArrayList<Progress> checkEmpAchievement(String empno,String p,String r,String i,String d,String e) {
-		int pno = Integer.parseInt(p);
-		int rno = Integer.parseInt(r);
-		int ino = Integer.parseInt(i);
-		int dno = Integer.parseInt(d);
-		int eno = Integer.parseInt(e);
+	public ArrayList<Progress> checkEmpAchievement(String empno,int p,int r,int i,int d,int e) {
+		int pno = p;
+		int rno = r;
+		int ino = i;
+		int dno = d;
+		int eno = e;
 		int ano = pno+rno+ino+dno+eno;
 		ArrayList<String> checkachievement = new ArrayList<String>();
 		ArrayList<Progress> allprogress = new ArrayList<Progress>();
