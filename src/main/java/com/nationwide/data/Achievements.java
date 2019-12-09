@@ -11,6 +11,8 @@ import javax.persistence.Table;
 @Table(name = "achievements")
 @NamedQuery(name = "Achievements.findMaxAchievement_id",
 			query = "select max(a.achievement_id) from Achievements a")
+@NamedQuery(name = "Achievements.getDescription",
+			query = "select a.description from Achievements a where a.achievement_id=?1")
 public class Achievements {
 	
 	@Id

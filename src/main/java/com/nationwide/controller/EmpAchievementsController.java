@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nationwide.data.CarouselAchievement;
 import com.nationwide.data.EmpAchievements;
 import com.nationwide.data.Progress;
 import com.nationwide.service.EmpAchievementsService;
@@ -26,7 +27,7 @@ public class EmpAchievementsController {
 	}
 	
 	@GetMapping("/emp_achievements/carousel")
-	public ArrayList<EmpAchievements> latestEmpAchievements(){
+	public ArrayList<CarouselAchievement> latestEmpAchievements(){
 		return service.latestEmpAchievements();
 	}
 	

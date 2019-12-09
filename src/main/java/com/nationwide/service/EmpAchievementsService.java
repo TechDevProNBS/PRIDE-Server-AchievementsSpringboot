@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nationwide.data.Achievements;
+import com.nationwide.data.CarouselAchievement;
 import com.nationwide.data.Criteria;
 import com.nationwide.data.EmpAchievements;
 import com.nationwide.data.Progress;
 import com.nationwide.repo.AchievementsRepo;
 import com.nationwide.repo.CriteriaRepo;
 import com.nationwide.repo.EmpAchievementsRepo;
+import com.nationwide.repo.EmployeesRepo;
 
 @Component
 public class EmpAchievementsService {
@@ -27,22 +29,35 @@ public class EmpAchievementsService {
 	@Autowired
 	private EmpAchievementsRepo erepo;
 	
+	@Autowired
+	private EmployeesRepo emprepo;
+	
 	public ArrayList<EmpAchievements> findAll(){
 		return erepo.findAll();
 	}
 	
-	public ArrayList<EmpAchievements> latestEmpAchievements(){
-		ArrayList<EmpAchievements> all= erepo.findAll();
-		ArrayList<EmpAchievements> topfive = new ArrayList<EmpAchievements>();
-		if(all.size()<5) {
-			return all;
+	public ArrayList<CarouselAchievement> latestEmpAchievements(){
+		ArrayList<CarouselAchievement> carousel = new ArrayList<CarouselAchievement>();
+		ArrayList<EmpAchievements> allempachievements= erepo.findAll();
+		ArrayList<Achievements> allachievements = arepo.findAll();
+		if(allempachievements.size()<5) {
+			for(int i=0;i<allempachievements.size();i++) {
+				String name = emprepo.getName(allempachievements.get(i).getRempno());
+				String description = arepo.getDescription(allempachievements.get(i).getAchievement_id());
+				CarouselAchievement thiscarousel = new CarouselAchievement(name, description);
+				carousel.add(thiscarousel);
+			}
+				
 		}
 		else{
-			for(int i=0;i<=4;i++) {
-				topfive.add(all.get(i));
+			for(int j=0;j<=4;j++) {
+				String name = emprepo.getName(allempachievements.get(j).getRempno());
+				String description = arepo.getDescription(allempachievements.get(j).getAchievement_id());
+				CarouselAchievement thiscarousel = new CarouselAchievement(name, description);
+				carousel.add(thiscarousel);
 			}
-			return topfive;
 		}
+		return carousel;
 	}
 	
 	public ArrayList<Progress> saveAchievementsGetProgress(String empno,int p,int r,int i,int d,int e) {
