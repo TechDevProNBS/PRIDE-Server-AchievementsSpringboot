@@ -256,7 +256,7 @@ public class EmpAchievementsService {
 	/**
 	 * Saves the achievement given into the employee achievements table.
 	 * @param empno employee number
-	 * @param achievementId the id of the achievement in the achivements table
+	 * @param achievementId the id of the achievement in the achievements table
 	 */
 	public void saveEmpAchievement(String empno, int achievementId) {
 		LocalDate date = LocalDate.now();
