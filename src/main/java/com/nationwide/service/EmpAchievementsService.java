@@ -32,22 +32,31 @@ public class EmpAchievementsService {
 	@Autowired
 	private EmployeesRepo emprepo;
 	
+	/**
+	 * Uses the Employee Achievements repository {@link erepo} to get the employee achievements.
+	 * @return an ArrayList of the employee achievements in the employee achievements table.
+	 */
 	public ArrayList<EmpAchievements> findAll(){
 		return erepo.findAll();
 	}
 	
+	/**
+	 * Uses the latest five employee achievements from {@link #erepo} (if there are less than five, it uses them all).
+	 * Passes the employee number of each achievement into the {@link getName} function within {@link Employees} to get the name of the employee.
+	 * Passes the achievement id of each achievement into the {@link getDescription} function within {@link #arepo} to get the achievement description.
+	 * Uses the name and descriptions to create {@link CarouselAchievement} objects.
+	 * @return an array of the five(or less) {@link CarouselAchievement} objects representing the five latest achievements; each containing the name of the employee and the achievement description
+	 */
 	public ArrayList<CarouselAchievement> latestEmpAchievements(){
 		ArrayList<CarouselAchievement> carousel = new ArrayList<CarouselAchievement>();
 		ArrayList<EmpAchievements> allempachievements= erepo.findAll();
-		ArrayList<Achievements> allachievements = arepo.findAll();
 		if(allempachievements.size()<5) {
 			for(int i=0;i<allempachievements.size();i++) {
 				String name = emprepo.getName(allempachievements.get(i).getRempno());
 				String description = arepo.getDescription(allempachievements.get(i).getAchievement_id());
 				CarouselAchievement thiscarousel = new CarouselAchievement(name, description);
 				carousel.add(thiscarousel);
-			}
-				
+			}	
 		}
 		else{
 			for(int j=0;j<=4;j++) {
@@ -60,6 +69,22 @@ public class EmpAchievementsService {
 		return carousel;
 	}
 	
+	/**
+	 * Creates an ArrayList of Strings called checkachievement, one element for each achievement in the achievements table, all initialised to say "started".
+	 * Takes in the below parameters and loops through the achievements table and the employee achievements table to check which achievements this employee has achieved.
+	 * If the achievement is already saved, it changes the String in checkachievement for that element to say "complete" and creates a {@link Progress} object stating that the achievement has been completed.
+	 * If the achievement is not saved, therefore if that element in checkachievement still says "started", it loops through the criteria table to see if they have reached the levels required to complete the achievement.
+	 * If they have, it saves the achievement in the employee achievements table, changes that element in checkachievement to say "complete", and creates a {@link Progress} object stating that the achievement has been completed.
+	 * If they haven't, it compares the number of relevant cards the employee has with the number needed for each column of the criteria table for that achievement, 
+	 * and returns an {@link Progress} object showing how close they are to completing the achievement.
+	 * @param empno employee number
+	 * @param p number of p category pride cards this employee has received
+	 * @param r number of r category pride cards this employee has received
+	 * @param i number of i category pride cards this employee has received
+	 * @param d number of d category pride cards this employee has received
+	 * @param e number of e category pride cards this employee has received
+	 * @return an array list of {@link Progress} objects showing each achievement, whether the employee has achieved it, and if not how close they are to achieving it, measured in points.
+	 */
 	public ArrayList<Progress> saveAchievementsGetProgress(String empno,int p,int r,int i,int d,int e) {
 		int pno = p;
 		int rno = r;
@@ -182,6 +207,20 @@ public class EmpAchievementsService {
 		return allprogress;
 	}
 	
+	/**
+	 * Creates an ArrayList of Strings called checkachievement, one element for each achievement in the achievements table, all initialised to say "started".
+	 * Takes in the below parameters and loops through the achievements table and the employee achievements table to check which achievements this employee has achieved.
+	 * If the achievement is already saved, it changes the String in checkachievement for that element to say "complete".
+	 * If the achievement is not saved, therefore if that element in checkachievement still says "started", it loops through the criteria table to see if they have reached the levels required to complete the achievement.
+	 * If they have, it saves the achievement in the employee achievements table and changes that element in checkachievement to say "now saved".
+	 * @param empno employee number
+	 * @param p number of p category pride cards this employee has received
+	 * @param r number of r category pride cards this employee has received
+	 * @param i number of i category pride cards this employee has received
+	 * @param d number of d category pride cards this employee has received
+	 * @param e number of e category pride cards this employee has received
+	 * @return an ArrayList of Strings called checkachievement that states which achievements the employee already had, now have achieved and are saved in the employee achievements table, and are still to achieve.
+	 */
 	public ArrayList<String> checkandsaveEmpAchievement(String empno,String p,String r,String i,String d,String e) {
 		int pno = Integer.parseInt(p);
 		int rno = Integer.parseInt(r);
@@ -214,6 +253,11 @@ public class EmpAchievementsService {
 		return checkachievement;
 	}
 	
+	/**
+	 * Saves the achievement given into the employee achievements table.
+	 * @param empno employee number
+	 * @param achievementId the id of the achievement in the achivements table
+	 */
 	public void saveEmpAchievement(String empno, int achievementId) {
 		LocalDate date = LocalDate.now();
 		EmpAchievements e = new EmpAchievements(empno, achievementId, Date.valueOf(date));

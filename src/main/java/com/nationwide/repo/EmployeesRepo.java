@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.nationwide.data.Achievements;
 import com.nationwide.data.Employees;
 
 public interface EmployeesRepo extends JpaRepository<Employees, String> {
