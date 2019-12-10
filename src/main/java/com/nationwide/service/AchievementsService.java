@@ -24,12 +24,17 @@ public class AchievementsService {
 	@Autowired
 	private EmpAchievementsRepo erepo;
 	
+	/**
+	 * Uses the Achievements repository {@link arepo} to get the achievements.
+	 * @return an ArrayList of the achievements in the achievements table.
+	 */
 	public ArrayList<Achievements> getAllAchievements() {
 		return arepo.findAll();
 	}
 	
 	/**
-	 * Saves 
+	 * Creates a new achievement from the description and number of points passed in and saves this in the achievements table.
+	 * Gets the id of this new achievement and creates a new criteria object from this and the other parameters, and then saves this in the criteria table.
 	 * @param description the description of the achievement to be saved.
 	 * @param points the number of points that will be gained from completing the achievement.
 	 * @param p the number of p category pride cards needed to obtain this achievement.
