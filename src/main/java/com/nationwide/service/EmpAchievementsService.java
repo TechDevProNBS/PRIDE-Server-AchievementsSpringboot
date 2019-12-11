@@ -50,21 +50,54 @@ public class EmpAchievementsService {
 	public ArrayList<CarouselAchievement> latestEmpAchievements(){
 		ArrayList<CarouselAchievement> carousel = new ArrayList<CarouselAchievement>();
 		ArrayList<EmpAchievements> allempachievements= erepo.findAll();
-		if(allempachievements.size()<5) {
-			for(int i=0;i<allempachievements.size();i++) {
-				String name = emprepo.getName(allempachievements.get(i).getRempno());
-				String description = arepo.getDescription(allempachievements.get(i).getAchievement_id());
-				CarouselAchievement thiscarousel = new CarouselAchievement(name, description);
-				carousel.add(thiscarousel);
-			}	
-		}
-		else{
-			for(int j=0;j<=4;j++) {
-				String name = emprepo.getName(allempachievements.get(j).getRempno());
-				String description = arepo.getDescription(allempachievements.get(j).getAchievement_id());
-				CarouselAchievement thiscarousel = new CarouselAchievement(name, description);
-				carousel.add(thiscarousel);
+		try {
+			if(allempachievements.size()<5) {
+				for(int i=0;i<allempachievements.size();i++) {
+					String name;
+					String description;
+					try {
+						name = emprepo.getName(allempachievements.get(i).getRempno());
+					}
+					catch (Exception E){
+						System.out.println(E);
+						name = "John Doe";
+					}
+					try {
+						description = arepo.getDescription(allempachievements.get(i).getAchievement_id());
+					}
+					catch(Exception F) {
+						System.out.println(F);
+						description = "Unknown - but well done!";
+					}
+					CarouselAchievement thiscarousel = new CarouselAchievement(name, description);
+					carousel.add(thiscarousel);
+				}		
 			}
+			else{
+				for(int j=0;j<=4;j++) {
+					String name;
+					String description;
+					try {
+						name = emprepo.getName(allempachievements.get(j).getRempno());
+					}
+					catch(Exception E) {
+						System.out.println(E);
+						name = "John Doe";
+					}
+					try {
+						description = arepo.getDescription(allempachievements.get(j).getAchievement_id());
+					}
+					catch(Exception F) {
+						System.out.println(F);
+						description = "Unknown - but well done!";
+					}
+					CarouselAchievement thiscarousel = new CarouselAchievement(name, description);
+					carousel.add(thiscarousel);
+				}
+			}
+		}
+		catch(Exception G) {
+			System.out.println(G);
 		}
 		return carousel;
 	}
