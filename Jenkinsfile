@@ -24,7 +24,9 @@ pipeline {
           
 		stage('Deploy') {
             steps {
-                                sh 'docker run -d -p 9001:9001 pride-achievements'
+		                sh 'docker container kill achievements'
+		                sh 'docker container rm achievements'
+                                sh 'docker run -d -p 9001:9001 --name achievements pride-achievements'
 				echo "Deployment has been deployed"
             }
         }
